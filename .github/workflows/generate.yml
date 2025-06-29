@@ -1,33 +1,38 @@
 name: Generate GIFs
 
 on:
-  workflow_dispatch: # Run manually from GitHub
+  workflow_dispatch: # Manual trigger from GitHub
 
 jobs:
   generate:
     runs-on: ubuntu-latest
 
     steps:
-    - uses: actions/checkout@v3
+      - uses: actions/checkout@v3
 
-    - name: Install system dependencies for canvas
-      run: |
-        sudo apt-get update
-        sudo apt-get install -y build-essential libcairo2-dev libpango1.0-dev libjpeg-dev libgif-dev librsvg2-dev
+      - name: Install system dependencies for canvas
+        run: |
+          sudo apt-get update
+          sudo apt-get install -y build-essential libcairo2-dev libpango1.0-dev libjpeg-dev libgif-dev librsvg2-dev
 
-    - name: Set up Node.js
-      uses: actions/setup-node@v3
-      with:
-        node-version: 18
+      - name: Download sprites.zip
+        run: |
+          wget https://github.com/nodoubt4027/euee/releases/download/v1.0/sprites.zip
+          unzip sprites.zip
 
-    - name: Install dependencies
-      run: npm install
+      - name: Set up Node.js
+        uses: actions/setup-node@v3
+        with:
+          node-version: 18
 
-    - name: Run batch generator
-      run: npm start
+      - name: Install dependencies
+        run: npm install
 
-    - name: Upload GIFs
-      uses: actions/upload-artifact@v4
-      with:
-        name: nft-gifs
-        path: gifs
+      - name: Run batch generator
+        run: npm start
+
+      - name: Upload GIFs
+        uses: actions/upload-artifact@v4
+        with:
+          name: nft-gifs
+          path: gifs
