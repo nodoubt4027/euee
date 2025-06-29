@@ -92,5 +92,9 @@ async function createGif(tokenId) {
     console.log(`✅ Transparent GIF saved: ${outputGif}`);
 }
 
-const tokenId = process.argv[2] || 2349;
-createGif(tokenId);
+if (require.main === module) {
+  const tokenId = process.argv[2] || 2349;
+  createGif(tokenId);
+} else {
+  module.exports = createGif;
+}
