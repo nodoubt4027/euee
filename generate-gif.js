@@ -10,7 +10,7 @@ const outputWidth = 768;
 const outputHeight = 1024;
 const frameCount = 24;
 
-const spritesPath = "C:\\Users\\nodoubt\\nft-discord-bot-master\\GIF MAKER\\sprites";
+const spritesPath = path.join(__dirname, 'sprites');
 
 async function fetchMetadata(tokenId) {
     const url = `https://bafybeihcdehzbelc5wepxefh3gthbyguj4byrbpbz76osg5tb67xvk2frq.ipfs.w3s.link/${tokenId}`;
