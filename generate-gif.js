@@ -23,11 +23,11 @@ function getTraitFile(traits, traitType, folder) {
     return trait ? path.join(spritesPath, folder, `${trait.value}.png`) : null;
 }
 
-async function createGif(tokenId) {
+async function createGif(tokenId, outDir = __dirname) {
     console.log(`Generating Transparent GIF for Token ID: ${tokenId}...`);
     const metadata = await fetchMetadata(tokenId);
     const traits = metadata.attributes;
-    const outputGif = path.join(__dirname, `${tokenId}.gif`);
+    const outputGif = path.join(outDir, `${tokenId}.gif`);
 
     const traitFiles = [
         getTraitFile(traits, "Auras", "Auras"),
